@@ -33,9 +33,17 @@ namespace ConsoleUI
             //colorManager.Add(c5);
             //colorManager.Add(c6);
             Console.WriteLine("--------------------------------- TÜM RENKLER ---------------------------------");
-            foreach (var color in colorManager.GetAll())
+            var result = colorManager.GetAll();
+            if (result.Success == true)
             {
-                Console.WriteLine(color.Name);
+                foreach (var color in result.Data)
+                {
+                    Console.WriteLine(color.Name);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
             //SİLME İŞLEMİ
             //colorManager.Delete(new Color { Id = 6 });
@@ -75,9 +83,17 @@ namespace ConsoleUI
             //brandManager.Add(b6);
             //brandManager.Add(b7);
             Console.WriteLine("--------------------------------- TÜM MARKALAR ---------------------------------");
-            foreach (var brand in brandManager.GetAll())
+            var result = brandManager.GetAll();
+            if (result.Success == true)
             {
-                Console.WriteLine(brand.Name);
+                foreach (var brand in result.Data)
+                {
+                    Console.WriteLine(brand.Name);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
 
             //SİLME İŞLEMİ
@@ -110,7 +126,7 @@ namespace ConsoleUI
             Car c7 = new Car { CarName = "ArabaYedi", BrandId = 1, ColorId = 1, DailyPrice = 600, ModelYear = new DateTime(2019, 10, 8), Description = "Klima Var - Otomatik" };
             Car c8 = new Car { CarName = "ArabaSekiz", BrandId = 5, ColorId = 4, DailyPrice = 650, ModelYear = new DateTime(2020, 10, 8), Description = "Klima Yok - Otomatik" };
             //EKLEME İŞLEMİ
-            //carManager.Add(c1);
+            //carManager.Add(c1);,
             //carManager.Add(c2);
             //carManager.Add(c3);
             //carManager.Add(c4);
@@ -119,9 +135,17 @@ namespace ConsoleUI
             //carManager.Add(c7);
             //carManager.Add(c8);
             Console.WriteLine("--------------------------------- TÜM ARAÇLAR ---------------------------------");
-            foreach (var car in carManager.GetAll())
+            var result = carManager.GetAll();
+            if (result.Success==true)
             {
-                Console.WriteLine(car.CarName);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
 
             //SİLME İŞLEMİ
@@ -133,29 +157,53 @@ namespace ConsoleUI
             //}
 
             //GÜNCELLEME İŞLEMİ
-            carManager.Update(new Car { Id = 7, CarName = "ArabaYedi", BrandId = 1, ColorId = 2, Description = "Klima Var - Otomatik", ModelYear = new DateTime(2021, 1, 9), DailyPrice = 700 });
-            Console.WriteLine("----------------------- GÜNCELLENEN ARAÇ SONRASI TÜM ARAÇLAR ---------------------");
-            foreach (var car in carManager.GetAll())
-            {
-                Console.WriteLine(car.CarName);
-            }
+            //carManager.Update(new Car { Id = 7, CarName = "ArabaYedi", BrandId = 1, ColorId = 2, Description = "Klima Var - Otomatik", ModelYear = new DateTime(2021, 1, 9), DailyPrice = 700 });
+            //Console.WriteLine("----------------------- GÜNCELLENEN ARAÇ SONRASI TÜM ARAÇLAR ---------------------");
+            //foreach (var car in carManager.GetAll())
+            //{
+            //    Console.WriteLine(car.CarName);
+            //}
 
             Console.WriteLine("---------------------- MARKASI AUDI (ID -1) OLAN ARAÇLAR ----------------------");
-            foreach (var car in carManager.GetCarsByBrandId(1))
+            var result2 = carManager.GetCarsByBrandId(1);
+            if (result2.Success == true)
             {
-                Console.WriteLine(car.CarName);
+                foreach (var car in result2.Data)
+                {
+                    Console.WriteLine(car.CarName);
+                }
             }
-            Console.WriteLine("---------------------- RENGİ BEYAZ (ID -2) OLAN ARAÇLAR ----------------------");
-            foreach (var car in carManager.GetCarsByColorId(2))
+            else
             {
-                Console.WriteLine(car.CarName);
-            }
-            Console.WriteLine("-------------------------------- ARAÇ DETAYLARI --------------------------------");
-            foreach (var car in carManager.GetCarDetails())
-            {
-                Console.WriteLine(car.CarName + "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice);
+                Console.WriteLine(result2.Message);
             }
 
+            Console.WriteLine("---------------------- RENGİ BEYAZ (ID -2) OLAN ARAÇLAR ----------------------");
+            var result3 = carManager.GetCarsByColorId(2);
+            if (result3.Success == true)
+            {
+                foreach (var car in result3.Data)
+                {
+                    Console.WriteLine(car.CarName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result3.Message);
+            }
+            Console.WriteLine("-------------------------------- ARAÇ DETAYLARI --------------------------------");
+            var result4 = carManager.GetCarDetails();
+            if (result4.Success == true)
+            {
+                foreach (var car in result4.Data)
+                {
+                    Console.WriteLine(car.CarName + "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result4.Message);
+            }
         }
     }
 }
