@@ -16,7 +16,6 @@ namespace ConsoleUI
 
             //UserTest();
             //CustomerTest();
-
             RentalTest();
         }
 
@@ -29,14 +28,13 @@ namespace ConsoleUI
             //var result = rentalManager.Add(rental2);
             //if (result.Success==true)
             //    Console.WriteLine(result.Message);
-            Console.WriteLine("---------------------------- KİRALANAN ARAÇLAR ----------------------------");
-            var result = rentalManager.GetAll();
+            Console.WriteLine("--------------------------- KİRALANAN ARAÇ DETAYLARI ---------------------------");
+            var result = rentalManager.GetRentalCarDetailDto();
             if (result.Success == true)
             {
-                Console.WriteLine(result.Message);
-                foreach (var rental in result.Data)
+                foreach (var car in result.Data)
                 {
-                    Console.WriteLine(rental.CarId + " " + rental.CustomerId + " " + rental.RentDate + " " + rental.ReturnDate);
+                    Console.WriteLine(car.CustomerName + " " + car.CustomerSurname + " - " + car.CarName + " - " + car.RentDate + " - " + car.ReturnDate);
                 }
             }
             else
@@ -57,13 +55,12 @@ namespace ConsoleUI
             //else
             //    Console.WriteLine(result.Message);
             Console.WriteLine("---------------------------- TÜM MÜŞTERİLER ----------------------------");
-            var result = customerManager.GetAll();
+            var result = customerManager.GetCustomerDetails();
             if (result.Success == true)
             {
-                Console.WriteLine(result.Message);
                 foreach (var customer in result.Data)
                 {
-                    Console.WriteLine(customer.Id + " " + customer.CompanyName);
+                    Console.WriteLine(customer.FirstName + " " + customer.LastName + " - " + customer.CompanyName);
                 }
             }
             else

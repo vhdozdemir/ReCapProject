@@ -38,6 +38,11 @@ namespace Business.Concreate
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(), Messages.CustomerListed);
         }
 
+        public IDataResult<List<CustomerDetailDto>> GetCustomerDetails()
+        {
+            return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails());
+        }
+
         public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);
